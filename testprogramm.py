@@ -13,6 +13,9 @@ from   art                  import *    # Optional (& advanced)
     # Initializing colorama
 init()
 
+    # Datetime variable
+now       = datetime.datetime.today().strftime("%H:%M:%S %d-%m-%Y")
+
 #   email function  (optional & advanced)
 # def gmail_send(subject, message, from_mail, to_mail, password):
 #     global link
@@ -28,18 +31,30 @@ init()
 #     server.send_message(msg)
 
 
-print(Fore.LIGHTCYAN_EX + "")    # Open Art funk
+# open_file = ("journal.text", "r")
+# file_content = open_file.read()
+# print(file_content)
+# open_file.close()
 
+
+print(Fore.LIGHTCYAN_EX + "")               # Open Art funk
+                                            #...............
 tprint("AWESOME JOURNAL", font="random")    # Art library
-
-print(""+Style.RESET_ALL)    # Close Art funk
+                                            #...............
+print(""+Style.RESET_ALL)                   # Close Art funk
 
 
 new_entry = input("ENTER DIARY ENTRY HERE >>> ")
 
 
-now       = datetime.datetime.today().strftime("%H:%M:%S %d-%m-%Y")
+here = os.getcwd().replace("\\","/")    # defining path variable for later if statement
 
+    # Display current
+if os.getcwd() in new_entry:    # If weird path things in entry, dont save entry
+    print("Something went wrong. NOT ADDING") 
 
-with open("Journal.txt", "a") as file:
-    file.write(now + new_entry)   
+elif new_entry != "":    # If entry is not empty
+    with open("Journal.txt", "a") as file:
+        file.write(now + "  " + new_entry + "\n")   
+else:
+    print("Empty sting. NOT ADDING")  
